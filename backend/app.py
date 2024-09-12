@@ -16,21 +16,22 @@ def get_advanced_stats():
     elif request.method == "GET":
         print("Received API call")
 
-        load_dotenv()
+        # Fetch query parameters with default values if not provided
+        league_id = request.args.get('leagueId')
+        swid = request.args.get('swid')
+        espn_s2 = request.args.get('espnS2')
+        year = request.args.get('year', type=int)
+        week = request.args.get('week', type=int)
+        league_median_name = request.args.get('leagueMedianName')
+        team_id_against_league_median = request.args.get('teamIdAgainstLeagueMedian', type=int)
 
-        league_id = os.getenv('LEAGUE_ID')
-        swid = os.getenv('SWID')
-        espn_s2 = os.getenv('ESPN_S2')
-        year = 2024
-        week = 2
-        league_median_name = "League Median"
-        team_id_against_league_median = 6
-
+        # Build the advanced stats JSON
         data = build_advanced_stats_json(league_id, swid, espn_s2, year, week, league_median_name, team_id_against_league_median)
 
         return _corsify_actual_response(jsonify(data))
     else:
         raise RuntimeError("Weird - don't know how to handle method {}".format(request.method))
+
 
 def _build_cors_preflight_response():
     response = make_response()

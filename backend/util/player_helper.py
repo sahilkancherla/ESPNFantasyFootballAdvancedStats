@@ -83,9 +83,23 @@ def get_team_actual_lineup_given_week(league, team_name, week, ignore_slots = ["
 
             lineup_slot = player.lineupSlot
             if not ignore_slots.__contains__(lineup_slot):
+
                 if not starting_lineup_dict.__contains__(lineup_slot):
                     starting_lineup_dict[lineup_slot] = []
-                starting_lineup_dict[lineup_slot].append(player)
+
+                player_info_dict = {}
+                player_info_dict["id"] = player.playerId
+                player_info_dict["name"] = player.name
+                player_info_dict["team"] = player.proTeam
+                player_info_dict["primary_position"] = player.position
+                player_info_dict["points"] = player.points
+                player_info_dict["opponent"] = player.pro_opponent
+                player_info_dict["game_played"] = player.game_played
+                player_info_dict["projected_points"] = player.projected_points
+                player_info_dict["on_bye_week"] = player.on_bye_week
+                player_info_dict["points_breakdown"] = player.on_bye_week
+
+                starting_lineup_dict[lineup_slot].append(player_info_dict)
             
         return starting_lineup_dict
     
@@ -183,7 +197,7 @@ def get_total_points_given_players(players):
     total_points = 0.0
 
     for player in players:
-        total_points += get_player_points_or_projected_points(player)
+        total_points += get_player_points_or_projected_points_player_dict(player)
 
     return round(total_points, 2)
     
@@ -231,7 +245,26 @@ def get_player_eligible_slots_given_week(league, team_name, week):
     
     return None
 
-def get_player_points_or_projected_points(player):
+def get_player_points_or_projected_points_player_dict(player):
+    """
+    Get the points for a player, considering if the game has been played.
+
+    Args:
+        player (Player): The player object to get points for.
+
+    Returns:
+        float: The player's points if the game is played, otherwise the projected points.
+
+    Example:
+        >>> player = Player(...)  # Initialize your Player object
+        >>> get_player_points_or_projected_points(player)
+        12.5
+    """
+    if player["game_played"] < 100:
+        return player["projected_points"]
+    return player["points"]
+
+def get_player_points_or_projected_points_box_player(player):
     """
     Get the points for a player, considering if the game has been played.
 
@@ -271,9 +304,9 @@ def get_player_with_most_points_actual_or_projected(players):
 
         if max_points_player is None:
             max_points_player = player
-            max_points = get_player_points_or_projected_points(player)
+            max_points = get_player_points_or_projected_points_box_player(player)
         else:
-            current_player_points = get_player_points_or_projected_points(player)
+            current_player_points = get_player_points_or_projected_points_box_player(player)
 
             if current_player_points > max_points:
                 max_points = current_player_points
@@ -281,28 +314,11 @@ def get_player_with_most_points_actual_or_projected(players):
     return max_points_player
 
 def get_team_best_lineup_given_week(league, team_name, week, ignore_slots = ["BE", "IR"]):
-    """
-    Get the best lineup for a team for a given week by maximizing points.
-
-    Args:
-        league (League): ESPN Fantasy League object.
-        team_name (str): Name of the team to optimize the lineup for.
-        week (int): The week number to get the best lineup for.
-        ignore_slots (list): List of slots to ignore when optimizing the lineup (default is ["BE", "IR"]).
-
-    Returns:
-        dict: A dictionary where the keys are positions and the values are lists of the best players 
-              for those positions.
-
-    Example:
-        >>> league = League(...)  # Initialize your League object
-        >>> get_team_best_lineup_given_week(league, "Rigged AF", 1)
-        {'QB': [BestQBPlayer], 'RB': [BestRBPlayer1, BestRBPlayer2], ...}
-    """
+    
     position_to_count = get_valid_position_slots_and_count(league, ignore_slots = ignore_slots)
     eligible_slots = get_player_eligible_slots_given_week(league, team_name, week)
 
-    best_team = {}
+    best_team = []
 
     for position in position_to_count:
 
@@ -314,14 +330,21 @@ def get_team_best_lineup_given_week(league, team_name, week, ignore_slots = ["BE
 
             # get player with max points
             max_points_player = get_player_with_most_points_actual_or_projected(players_available)
-            players_for_position.append(max_points_player)
+
+            player_info_dict = {}
+            player_info_dict["id"] = max_points_player.playerId
+            player_info_dict["points"] = max_points_player.points
+            player_info_dict["slot"] = position
+            player_info_dict["opponent"] = max_points_player.pro_opponent
+            player_info_dict["game_played"] = max_points_player.game_played
+            player_info_dict["on_bye_week"] = max_points_player.on_bye_week
 
             # remove that player from all lists
             for slot in eligible_slots:
                 if eligible_slots[slot].__contains__(max_points_player):
                     eligible_slots[slot].remove(max_points_player)
-
-        best_team[position] = players_for_position
+            
+            best_team.append(player_info_dict) 
     
     return best_team
 

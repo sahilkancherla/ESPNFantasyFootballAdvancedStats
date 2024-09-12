@@ -1,11 +1,6 @@
 from espn_api.football import League
 from util.league_median_helper import get_current_and_projected_scores_for_week, get_league_median_not_including_league_median_opponent
-from util.player_helper import get_team_actual_lineup_given_week, get_team_actual_lineup_given_week_total_points, get_player_points_or_projected_points, get_team_best_lineup_given_week, get_team_best_lineup_given_week_total_points, get_team_actual_lineup_player_ids_given_week, get_team_best_lineup_player_ids_given_week
-def build_advanced_stats_json(league_id, swid, espn_s2, current_year, current_week):
-
-    # change this
-    league_median_name = "League Median"
-    team_id_against_league_median = 1
+def build_advanced_stats_json(league_id, swid, espn_s2, current_year, current_week, league_median_name, team_id_against_league_median):
 
     message = {}
 
@@ -30,7 +25,7 @@ def build_advanced_stats_json(league_id, swid, espn_s2, current_year, current_we
     
     # get missed out points data
 
-    message["missedPointsData"] = get_missed_points_data(league, current_week=current_week, league_median_name=league_median_name)
+    # message["missedPointsData"] = get_missed_points_data(league, current_week=current_week, league_median_name=league_median_name)
 
     return message
 
@@ -69,19 +64,21 @@ def get_league_information(league):
 
 def get_current_data(league, current_week, league_median_name):
     teams_and_current_scores, teams_and_projected_scores = get_current_and_projected_scores_for_week(league, current_week, league_median_name)
+    
+    week_data = {}
     current_week_scores = {}
+    projected_week_scores = {}
 
-    for current_score_info, projected_score_info in zip(teams_and_current_scores, teams_and_projected_scores):
-        team_id = current_score_info[0]
-        current_score = current_score_info[1]
-        projected_score = projected_score_info[1]
+    for team_id, current_score in teams_and_current_scores:
+        current_week_scores[team_id] = current_score
 
-        info = {}
-        info["currentScore"] = current_score
-        info["projectedScore"] = projected_score
-        current_week_scores[team_id] = info
-    return current_week_scores
+    for team_id, projected_score in teams_and_projected_scores:
+        projected_week_scores[team_id] = projected_score
 
+    week_data["currentScores"] = current_week_scores
+    week_data["projectedScores"] = projected_week_scores
+
+    return week_data
 
 def get_league_median_information(league, current_week, league_median_name, team_id_against_league_median):
 
@@ -114,6 +111,8 @@ def get_missed_points_data(league, current_week, league_median_name):
         
         missed_points_data_team = {}
         missed_points_data_team["missedPoints"] = abs(max(round(best_pts - actual_pts, 2), 0))
+        missed_points_data_team["startingLineup"] = actual_lineup
+        missed_points_data_team["best_lineup"] = best_lineup
         missed_points_data[team_id] = missed_points_data_team
     
     return missed_points_data

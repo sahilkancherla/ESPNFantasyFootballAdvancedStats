@@ -1,0 +1,32 @@
+/* Container class with margin and gray background color */
+.container {
+  margin: rem(20px); /* Add margin all around */
+  background-color: #fcfafa; /* Set background color to gray (245) */
+  padding: rem(20px); /* Optional: Add padding inside the container */
+  border-radius: rem(8px); /* Optional: Add border-radius for rounded corners */
+  box-shadow: 0 rem(4px) rem(8px) rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow effect */
+}
+
+/* Existing .title class */
+.title {
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+  font-size: rem(50px); /* Adjusted font size to 50px */
+  font-weight: 900;
+  letter-spacing: rem(-2px);
+
+  @media (max-width: $mantine-breakpoint-md) {
+    font-size: rem(40px); /* Optional: Adjust font size for smaller screens */
+  }
+}
+
+/* Subtitle class */
+.subtitle {
+  color: light-dark(var(--mantine-color-gray), var(--mantine-color-white));
+  font-size: rem(100px); /* Adjusted font size to 100px */
+  font-weight: 900;
+  letter-spacing: rem(-2px);
+
+  @media (max-width: $mantine-breakpoint-md) {
+    font-size: rem(50px); /* Adjust font size for smaller screens */
+  }
+}

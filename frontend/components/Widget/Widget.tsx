@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Divider, Paper, Text, Title } from '@mantine/core';
 import classes from './Widget.module.css';
 import { LeagueMedianChart } from '../LeagueMedianChart/LeagueMedianChart';

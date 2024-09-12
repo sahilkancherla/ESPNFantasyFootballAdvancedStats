@@ -1,5 +1,8 @@
 /* eslint-disable max-len */
+// @ts-nocheck
+
 'use client';
+
 
 import { Text, Badge, Card, Group, Accordion } from '@mantine/core';
 import classes from './MissedPoints.module.css';

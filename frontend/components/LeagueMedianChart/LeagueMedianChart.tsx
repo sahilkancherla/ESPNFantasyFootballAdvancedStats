@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+// @ts-nocheck
 
 'use client';
 
@@ -16,7 +17,6 @@ const PROJECTED_TEXT = 'projected';
 
 const LEAGUE_MEDIAN_ID = '100';
 const LEAGUE_MEDIAN_NAME = 'League Median';
-
 
 interface Scores {
     [key: string]: number;

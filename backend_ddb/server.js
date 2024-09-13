@@ -30,5 +30,5 @@ app.use(express.urlencoded({ extended: false })); // Middleware to parse URL-enc
 // Routes
 app.use('/api/fantasyPlayerData', require('./routes/fantasyPlayerData'));
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 443;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

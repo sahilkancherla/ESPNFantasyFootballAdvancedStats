@@ -1,0 +1,84 @@
+.row {
+    display: flex;
+    height: 100%; /* Make sure this takes the full height of the parent */
+    align-items: stretch; /* Ensure both boxes stretch to the same height */
+    gap: 1rem; /* Adjust as needed for space between the two boxes */
+    border-bottom: 2px solid rgb(255, 255, 255); /* Add a border with a color and width */
+    border-top: 2px solid rgb(255, 255, 255); /* Add a border with a color and width */
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+.box15 {
+    flex: 1; /* Allow this box to grow and shrink equally with .box85 */
+    background-color: rgb(250, 250, 250); /* Or whatever color you want */
+    display: flex; /* Enable flexbox for centering content */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    box-sizing: border-box;
+    padding: 1rem; /* Optional: Add padding for better spacing */
+}
+
+.box85 {
+    flex: 7; /* Allow this box to grow and shrink equally with .box15 */
+    background-color: white;
+    display: flex;
+    flex-direction: row; /* Align children horizontally */
+    flex-wrap: wrap; /* Allow wrapping of cards if they exceed the container width */
+    gap: 1rem; /* Space between cards */
+    box-sizing: border-box;
+    padding: 1rem; /* Optional: Add padding for better spacing */
+}
+
+.player_started_container {
+    flex: 0 1 calc(33.3% - 1rem); /* Adjust to fit cards side by side with gap consideration */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.tierBannerText {
+    display: flex; /* Enable flexbox */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    width: 100%;
+    height: 100%; /* Ensure the height is set if needed */
+    background-color: rgb(240, 240, 240); /* Or whatever color you want */
+    color: rgb(0, 0, 0); /* Optional: Set text color for better contrast */
+    font-weight: 700;
+    font-size: 1.1rem; /* Adjust font size as needed */
+}
+
+
+.tierBanner {
+    display: flex; /* Enable flexbox */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    width: 100%;
+}
+
+.noPlayers {
+    display: flex; /* Enable flexbox */
+    align-items: center; /* Center content vertically */
+    justify-content: flex-start; /* Center content horizontally */
+    width: 100%;
+    height: 100%; /* Ensure the height is set if needed */
+    color: rgb(210, 210, 210); /* Optional: Set text color for better contrast */
+    font-weight: 600;
+    font-size: 0.75rem; /* Adjust font size as needed */
+}
+
+.teamName {
+    font-weight: bold;
+}
+
+.currentTeam {
+    font-weight: 500;
+    font-size: 1.1rem; /* Adjust font size as needed */
+    margin-bottom: 1.1rem;
+}
+
+.menuButton {
+    margin-bottom: 1.1rem;
+    width: 15%;
+}

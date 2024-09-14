@@ -1,17 +1,33 @@
-// @ts-nocheck
-
-import { Divider, Paper, Text, Title } from '@mantine/core';
+import { useState } from 'react';
+import { Paper, Title, Text, Collapse, Button } from '@mantine/core';
+import { IconChevronUp, IconChevronDown } from '@tabler/icons-react';
 import classes from './Widget.module.css';
-import { LeagueMedianChart } from '../LeagueMedianChart/LeagueMedianChart';
 
-export function Widget({title, subtitle, content}) {
+export function Widget({ title, subtitle, content }) {
+  const [opened, setOpened] = useState(true);
+
   return (
     <div className={classes.container}>
-        <Paper shadow="xs" p="xl">
+      <Paper shadow="xs" p="xl" withBorder>
+        <div className={classes.header}>
+          <div>
             <Title className={classes.title}>{title}</Title>
-            <Text>{subtitle}</Text>
+            <Text className={classes.subtitle}>{subtitle}</Text>
+          </div>
+          <Button
+            variant="subtle"
+            onClick={() => setOpened((prev) => !prev)}
+            size="xs"
+          >
+            {opened ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
+          </Button>
+        </div>
+        <Collapse in={opened}>
+          <div className={classes.content}>
             {content}
-        </Paper>
+          </div>
+        </Collapse>
+      </Paper>
     </div>
   );
 }

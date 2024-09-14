@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Title } from '@mantine/core';
+import { Title, Loader, Text } from '@mantine/core';
 import { Widget } from '../components/Widget/Widget';
 import { LeagueMedianChart } from '../components/LeagueMedianChart/LeagueMedianChart';
 import { MissedPoints } from '../components/MissedPoints/MissedPoints';
+import { PlayerTierData } from '../components/PlayerTierData/PlayerTierData';
 
 import classes from './page.module.css';
 
@@ -95,14 +96,20 @@ export default function HomePage() {
         stats != null && storedStats != null ?
           <div>
             <Title className={classes.title}>
-                League Median Tracker
+                ESPN Fantasy Football Advanced Stats
             </Title>
             <Title className={classes.sub_title}>
-                JAIRE Goat
+                League: JAIRE Goat
             </Title>
             <Widget title="League Median Tracker" subtitle="Tracking the league median for the current week" content={<LeagueMedianChart data={stats}></LeagueMedianChart>} />
             <Widget title="Missed Points" subtitle="Calculating the best possible lineup and total missed points" content={<MissedPoints currentData={stats} storedData={storedStats}></MissedPoints>} />
-          </div> : <></>
+            <Widget title="Player Tiers" subtitle="Dividing the players into tiers" content={<PlayerTierData currentData={stats} storedData={storedStats}></PlayerTierData>} />
+
+          </div> :
+          <div className={classes.loading}>
+            <Loader color="blue" />
+            <Text className={classes.loadingText}>Fetching fantasy advanced stats...</Text>
+          </div>
       }
     </div>
   );

@@ -1,29 +1,39 @@
 /* Container class with margin and gray background color */
 .container {
-  margin: rem(20px); /* Add margin all around */
-  padding: rem(20px); /* Optional: Add padding inside the container */
+  margin: 20px; /* Standardized unit */
+  padding: 20px; /* Consistent padding */
+}
+
+/* Header class to align items within the header */
+.header {
+  display: flex;
+  justify-content: space-between; /* Spread title and button apart */
+  align-items: center; /* Vertically center the content */
+  width: 100%; /* Ensure it takes full width */
+  margin-bottom: 20px; /* Space between header and content */
 }
 
 /* Existing .title class */
 .title {
-  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
-  font-size: rem(25px); /* Adjusted font size to 50px */
+  color: var(--mantine-color-black); /* Consistent dark color */
+  font-size: 25px; /* Font size adjustment */
   font-weight: 700;
-  letter-spacing: rem(0px);
+  letter-spacing: 0; /* Removed rem conversion for letter-spacing */
 
-  @media (max-width: $mantine-breakpoint-md) {
-    font-size: rem(40px); /* Optional: Adjust font size for smaller screens */
+  @media (max-width: 768px) { /* Standardized media query */
+    font-size: 20px; /* Smaller screens font size */
   }
 }
 
 /* Subtitle class */
 .subtitle {
-  color: light-dark(var(--mantine-color-gray), var(--mantine-color-white));
-  font-size: rem(15px); /* Adjusted font size to 100px */
-  font-weight: 900;
-  letter-spacing: rem(-2px);
+  color: var(--mantine-color-gray-dark); /* Updated color */
+  font-size: 15px; /* Adjusted font size */
+  font-weight: 500;
+  margin-bottom: 1rem; /* Use rem unit for consistency */
+  line-height: 1.5; /* Better readability */
+}
 
-  @media (max-width: $mantine-breakpoint-md) {
-    font-size: rem(50px); /* Adjust font size for smaller screens */
-  }
+.expandText {
+  margin: 20
 }

@@ -5,6 +5,8 @@
   padding: rem(20px); /* Optional: Add padding inside the container */
   border-radius: rem(8px); /* Optional: Add border-radius for rounded corners */
   box-shadow: 0 rem(4px) rem(8px) rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow effect */
+  align-items: center;
+  justify-content: center;
 }
 
 /* Existing .title class */
@@ -30,3 +32,18 @@
     font-size: rem(50px); /* Adjust font size for smaller screens */
   }
 }
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Makes sure the loading content takes the full viewport height */
+}
+
+.loadingText {
+  font-weight: 800;
+  font-size: rem(15px);
+  margin-left: 1rem; /* Adds spacing between the loader and the text */
+}
+
+

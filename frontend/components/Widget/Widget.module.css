@@ -1,7 +1,7 @@
 /* Container class with margin and gray background color */
 .container {
-  margin: 20px; /* Standardized unit */
-  padding: 20px; /* Consistent padding */
+  margin: 10px; /* Standardized unit */
+  padding: 10px; /* Consistent padding */
 }
 
 /* Header class to align items within the header */
@@ -10,7 +10,6 @@
   justify-content: space-between; /* Spread title and button apart */
   align-items: center; /* Vertically center the content */
   width: 100%; /* Ensure it takes full width */
-  margin-bottom: 20px; /* Space between header and content */
 }
 
 /* Existing .title class */
@@ -36,4 +35,14 @@
 
 .expandText {
   margin: 20
+}
+
+.closedContent {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: 15px; /* Adjusted font size */
+  font-weight: 500;
+  color: rgb(150, 150, 150)
 }

@@ -108,7 +108,7 @@ export default function HomePage() {
           </div> :
           <div className={classes.loading}>
             <Loader color="blue" />
-            <Text className={classes.loadingText}>Fetching fantasy advanced stats...</Text>
+            <Text className={classes.loadingText}>Fetching fantasy football advanced stats...</Text>
           </div>
       }
     </div>

@@ -68,8 +68,8 @@ export function LeagueMedianChart({ data }) {
     const leagueMedianScoreEntry = {
         teamId: LEAGUE_MEDIAN_ID,
         teamName: LEAGUE_MEDIAN_NAME,
-        currentScore: leagueMedianData.currentMedian,
-        projectedScore: leagueMedianData.projectedMedian,
+        currentScore: leagueMedianData.currentMedian.toFixed(2),
+        projectedScore: leagueMedianData.projectedMedian.toFixed(2),
         color: leagueMedianCurrentColor,
     };
 

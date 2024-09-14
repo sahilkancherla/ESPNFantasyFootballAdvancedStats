@@ -1,6 +1,8 @@
 from espn_api.football import League
 from util.league_median_helper import get_current_and_projected_scores_for_week, get_league_median_not_including_league_median_opponent
-def build_advanced_stats_json(league_id, swid, espn_s2, current_year, current_week, league_median_name, team_id_against_league_median):
+from util.player_tiers_helper import get_tier_to_players_by_team
+
+def build_advanced_stats_json(league_id, swid, espn_s2, current_year, current_week, league_median_name, team_id_against_league_median, tier_size, free_agents_size):
 
     message = {}
 
@@ -23,9 +25,9 @@ def build_advanced_stats_json(league_id, swid, espn_s2, current_year, current_we
     
     message["leagueMedianData"] = get_league_median_information(league, current_week=current_week, league_median_name=league_median_name, team_id_against_league_median = team_id_against_league_median)
     
-    # get missed out points data
+    # get player tier info depending on current roster
 
-    # message["missedPointsData"] = get_missed_points_data(league, current_week=current_week, league_median_name=league_median_name)
+    message["playerTierInformation"] = get_player_tier_information(league, tier_size, free_agents_size)
 
     return message
 
@@ -94,25 +96,8 @@ def get_league_median_information(league, current_week, league_median_name, team
 
     return league_median_information
 
-def get_missed_points_data(league, current_week, league_median_name):
-
-    missed_points_data = {}
+def get_player_tier_information(league, tier_size, free_agents_size = 100):
     
-    for team in league.teams:
-        team_id = team.team_id
-        team_name = team.team_name
-        if team_name == 'Unknown' or team_name == league_median_name:
-            continue
-
-        actual_pts = get_team_actual_lineup_given_week_total_points(league, team_name, current_week, ["BE", "IR"])
-        actual_lineup = get_team_actual_lineup_given_week(league, team_name, current_week, ["BE", "IR"])
-        best_pts = get_team_best_lineup_given_week_total_points(league, team_name, current_week, ["BE", "IR"])
-        best_lineup = get_team_best_lineup_given_week(league, team_name, current_week, ["BE", "IR"])
-        
-        missed_points_data_team = {}
-        missed_points_data_team["missedPoints"] = abs(max(round(best_pts - actual_pts, 2), 0))
-        missed_points_data_team["startingLineup"] = actual_lineup
-        missed_points_data_team["best_lineup"] = best_lineup
-        missed_points_data[team_id] = missed_points_data_team
+    tiers_to_players = get_tier_to_players_by_team(league, tier_size, free_agents_size)
     
-    return missed_points_data
+    return tiers_to_players

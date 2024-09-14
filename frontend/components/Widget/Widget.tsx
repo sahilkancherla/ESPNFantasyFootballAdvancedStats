@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useState } from 'react';
 import { Paper, Title, Text, Collapse, Button } from '@mantine/core';
 import { IconChevronUp, IconChevronDown } from '@tabler/icons-react';

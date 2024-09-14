@@ -107,7 +107,7 @@ export function LeagueMedianChart({ data }) {
                           tickLine="y"
                         />
                     </div>
-                    <Text>The current league median is at {leagueMedianData.currentMedian}. {againstLeagueMedianTeamName} is {currentDiffToLeagueMedian > 0 ? 'ahead' : 'behind'} by {Math.abs(currentDiffToLeagueMedian).toFixed(2)} points.</Text>
+                    <Text>The current league median is at {leagueMedianData.currentMedian.toFixed(2)}. {againstLeagueMedianTeamName} is {currentDiffToLeagueMedian > 0 ? 'ahead' : 'behind'} by {Math.abs(currentDiffToLeagueMedian).toFixed(2)} points.</Text>
                 </div> :
                 <div>
                     <div className={classes.container}>
@@ -121,7 +121,7 @@ export function LeagueMedianChart({ data }) {
                           tickLine="y"
                         />
                     </div>
-                    <Text>The projected league median is at {leagueMedianData.projectedMedian}. {againstLeagueMedianTeamName} is {projectedDiffToLeagueMedian > 0 ? 'ahead' : 'behind'} by {Math.abs(projectedDiffToLeagueMedian).toFixed(2)} points.</Text>
+                    <Text>The projected league median is at {leagueMedianData.projectedMedian.toFixed(2)}. {againstLeagueMedianTeamName} is {projectedDiffToLeagueMedian > 0 ? 'ahead' : 'behind'} by {Math.abs(projectedDiffToLeagueMedian).toFixed(2)} points.</Text>
                 </div>
 
         }

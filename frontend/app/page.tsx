@@ -21,9 +21,9 @@ export default function HomePage() {
       const swid = '864C6648-6746-42D3-A0D2-C2041D50FADD';
       const espnS2 = 'AEBLZmYmFB%2Fd0Ksi1rwg319dLQz44knGpDd6fp%2FhupuoLyJjsBxoeddNy1oBEkoMXeyDJJ6zycwok0PbMERfnC%2F5ZLD7JctADtj%2Fp8j9vmQNZZJqVTc7c4ki6qsxsK001kxqHgHQk8rIOu1Or4Qv4%2FR1BTUWfpRlQyfbfzRa%2FiQWgsqr8B%2BSdmLU0jS%2BDia%2BgXJjO2sz8QhEOzwqAhrJhyEv0RHx6vGjPdM%2Bm3ifgH1eZGknJr2fEXtS5NBezG5lm7cgfnktlWgvOFSMYuoHkAmv9Urb2G7x8u19b8fuJplODA%3D%3D';
       const year = 2024;
-      const week = 7;
+      const week = 9;
       const leagueMedianName = 'League Median';
-      const teamIdAgainstLeagueMedian = 6;
+      const teamIdAgainstLeagueMedian = 5;
 
       // Construct the URL with query parameters
 
